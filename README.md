@@ -17,7 +17,7 @@ Clone this repository.
 Navigate to the project directory.
 Install dependencies using npm install.
 Start the project with Parcel using parcel src/index.html.
-Access the application at http://localhost:55303 in your preferred browser.
+Access the application at http://localhost:1234 in your preferred browser.
 Usage
 
 Once the project is running, open your browser to view the basic app. Currently, it displays a simple greeting message.
