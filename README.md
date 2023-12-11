@@ -27,5 +27,3 @@ Build Process
 Utilizes Parcel for bundling, transpiling, and optimizing project files.
 Executing parcel src/index.html initiates Parcel, triggering the build process and generating a dist directory containing bundled JavaScript, CSS, and other optimized files.
 Contributing
-
-Contributions are encouraged! Fork this repository, implement changes, and submit a pull request to contribute. Your input is appreciated.

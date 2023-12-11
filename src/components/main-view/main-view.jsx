@@ -6,13 +6,19 @@ export const MainView = () => {
 const [movies, setMovies] = useState([]);
 
 const [selectedMovie, setSelectedMovie] = useState(null);
+
 useEffect(() => {
-  fetch("https://flixster-movies-7537569b59ac.herokuapp.com")
-    .then((response) => response.json())
+  fetch("https://flixster-movies-7537569b59ac.herokuapp.com/movies")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then((data) => {
       console.log("Movies from api:", data);
-      const moviesFromApi = data.docs.map((doc) => {
-        return {
+      if (data && data.docs && Array.isArray(data.docs)) {
+        const moviesFromApi = data.docs.map((doc) => ({
           _id: doc._id,
           Title: doc.Title,
           Description: doc.Description,
@@ -27,12 +33,20 @@ useEffect(() => {
           },
           ImageURL: doc.ImageURL,
           Featured: doc.Featured || false
-        };
-      });
-      setMovies(moviesFromApi); // Setting the movies in state
+        }));
+        setMovies(moviesFromApi);
+      } else {
+        console.error('Invalid data format received from the API');
+      }
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+      // Handle errors or set a specific state to display an error message
     });
 }, []);
-  
+
+
+
 
   
   
@@ -50,7 +64,7 @@ useEffect(() => {
       <div>
         {movies.map((movie) => (
           <MovieCard
-            key={movie.id}
+            key={movie._id}
             movie={movie}
             onMovieClick={(newSelectedMovie) => {
               setSelectedMovie(newSelectedMovie);

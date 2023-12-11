@@ -27176,27 +27176,33 @@ const MainView = ()=>{
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
-        fetch("https://flixster-movies-7537569b59ac.herokuapp.com").then((response)=>response.json()).then((data)=>{
+        fetch("https://flixster-movies-7537569b59ac.herokuapp.com/movies").then((response)=>{
+            if (!response.ok) throw new Error("Network response was not ok");
+            return response.json();
+        }).then((data)=>{
             console.log("Movies from api:", data);
-            const moviesFromApi = data.docs.map((doc)=>{
-                return {
-                    _id: doc._id,
-                    Title: doc.Title,
-                    Description: doc.Description,
-                    Genre: {
-                        Name: doc.Genre?.Name || "",
-                        Description: doc.Genre?.Description || ""
-                    },
-                    Director: {
-                        Name: doc.Director?.Name || "",
-                        Bio: doc.Director?.Bio || "",
-                        Birth: doc.Director?.Birth || 0
-                    },
-                    ImageURL: doc.ImageURL,
-                    Featured: doc.Featured || false
-                };
-            });
-            setMovies(moviesFromApi); // Setting the movies in state
+            if (data && data.docs && Array.isArray(data.docs)) {
+                const moviesFromApi = data.docs.map((doc)=>({
+                        _id: doc._id,
+                        Title: doc.Title,
+                        Description: doc.Description,
+                        Genre: {
+                            Name: doc.Genre?.Name || "",
+                            Description: doc.Genre?.Description || ""
+                        },
+                        Director: {
+                            Name: doc.Director?.Name || "",
+                            Bio: doc.Director?.Bio || "",
+                            Birth: doc.Director?.Birth || 0
+                        },
+                        ImageURL: doc.ImageURL,
+                        Featured: doc.Featured || false
+                    }));
+                setMovies(moviesFromApi);
+            } else console.error("Invalid data format received from the API");
+        }).catch((error)=>{
+            console.error("Error fetching data:", error);
+        // Handle errors or set a specific state to display an error message
         });
     }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
@@ -27204,14 +27210,14 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 41,
+        lineNumber: 55,
         columnNumber: 9
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 46,
+        lineNumber: 60,
         columnNumber: 14
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27221,9 +27227,9 @@ const MainView = ()=>{
                     onMovieClick: (newSelectedMovie)=>{
                         setSelectedMovie(newSelectedMovie);
                     }
-                }, movie.id, false, {
+                }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 52,
+                    lineNumber: 66,
                     columnNumber: 11
                 }, undefined)),
             selectedMovie === null && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27235,13 +27241,13 @@ const MainView = ()=>{
                 children: "Please select a movie to view details."
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 62,
+                lineNumber: 76,
                 columnNumber: 11
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 50,
+        lineNumber: 64,
         columnNumber: 7
     }, undefined);
 };
