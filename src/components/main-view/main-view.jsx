@@ -16,9 +16,8 @@ useEffect(() => {
       return response.json();
     })
     .then((data) => {
-      console.log("Movies from api:", data);
-      if (data && data.docs && Array.isArray(data.docs)) {
-        const moviesFromApi = data.docs.map((doc) => ({
+   
+        const moviesFromApi = data.map((doc) => ({
           _id: doc._id,
           Title: doc.Title,
           Description: doc.Description,
@@ -35,9 +34,7 @@ useEffect(() => {
           Featured: doc.Featured || false
         }));
         setMovies(moviesFromApi);
-      } else {
-        console.error('Invalid data format received from the API');
-      }
+    
     })
     .catch((error) => {
       console.error('Error fetching data:', error);
@@ -45,11 +42,6 @@ useEffect(() => {
     });
 }, []);
 
-
-
-
-  
-  
     if (selectedMovie) {
       return (
         <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
