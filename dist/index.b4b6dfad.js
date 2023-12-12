@@ -27180,26 +27180,23 @@ const MainView = ()=>{
             if (!response.ok) throw new Error("Network response was not ok");
             return response.json();
         }).then((data)=>{
-            console.log("Movies from api:", data);
-            if (data && data.docs && Array.isArray(data.docs)) {
-                const moviesFromApi = data.docs.map((doc)=>({
-                        _id: doc._id,
-                        Title: doc.Title,
-                        Description: doc.Description,
-                        Genre: {
-                            Name: doc.Genre?.Name || "",
-                            Description: doc.Genre?.Description || ""
-                        },
-                        Director: {
-                            Name: doc.Director?.Name || "",
-                            Bio: doc.Director?.Bio || "",
-                            Birth: doc.Director?.Birth || 0
-                        },
-                        ImageURL: doc.ImageURL,
-                        Featured: doc.Featured || false
-                    }));
-                setMovies(moviesFromApi);
-            } else console.error("Invalid data format received from the API");
+            const moviesFromApi = data.map((doc)=>({
+                    _id: doc._id,
+                    Title: doc.Title,
+                    Description: doc.Description,
+                    Genre: {
+                        Name: doc.Genre?.Name || "",
+                        Description: doc.Genre?.Description || ""
+                    },
+                    Director: {
+                        Name: doc.Director?.Name || "",
+                        Bio: doc.Director?.Bio || "",
+                        Birth: doc.Director?.Birth || 0
+                    },
+                    ImageURL: doc.ImageURL,
+                    Featured: doc.Featured || false
+                }));
+            setMovies(moviesFromApi);
         }).catch((error)=>{
             console.error("Error fetching data:", error);
         // Handle errors or set a specific state to display an error message
@@ -27210,14 +27207,14 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 55,
+        lineNumber: 47,
         columnNumber: 9
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 60,
+        lineNumber: 52,
         columnNumber: 14
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27229,7 +27226,7 @@ const MainView = ()=>{
                     }
                 }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 66,
+                    lineNumber: 58,
                     columnNumber: 11
                 }, undefined)),
             selectedMovie === null && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27241,13 +27238,13 @@ const MainView = ()=>{
                 children: "Please select a movie to view details."
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 76,
+                lineNumber: 68,
                 columnNumber: 11
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 64,
+        lineNumber: 56,
         columnNumber: 7
     }, undefined);
 };
