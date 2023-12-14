@@ -1,22 +1,32 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
+import { SignupView } from "../signup-view/signup-view";
 
 export const MainView = () => {
-const [movies, setMovies] = useState([]);
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
+  const [user, setUser] = useState(storedUser ? storedUser : null);
+  const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
-const [selectedMovie, setSelectedMovie] = useState(null);
+  useEffect(() => {
+    if (!token) return;
 
-useEffect(() => {
-  fetch("https://flixster-movies-7537569b59ac.herokuapp.com/movies")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+    fetch("https://flixster-movies-7537569b59ac.herokuapp.com/movies", {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
-      return response.json();
     })
-    .then((data) => {
-   
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
         const moviesFromApi = data.map((doc) => ({
           _id: doc._id,
           Title: doc.Title,
@@ -34,41 +44,54 @@ useEffect(() => {
           Featured: doc.Featured || false
         }));
         setMovies(moviesFromApi);
-    
-    })
-    .catch((error) => {
-      console.error('Error fetching data:', error);
-      // Handle errors or set a specific state to display an error message
-    });
-}, []);
-
-    if (selectedMovie) {
-      return (
-        <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-      );
-    }
-  
-    if (movies.length === 0) {
-      return <div>The list is empty!</div>;
-    }
-  
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        // Handle errors or set a specific state to display an error message
+      });
+  }, [token]);
+  if (!user) {
     return (
-      <div>
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie._id}
-            movie={movie}
-            onMovieClick={(newSelectedMovie) => {
-              setSelectedMovie(newSelectedMovie);
-            }}
-          />
-        ))}
-        {/* Adding a styled message when no movie is selected */}
-        {selectedMovie === null && (
-          <div style={{ backgroundColor: 'lightgrey', padding: '10px', margin: '5px' }}>
-            Please select a movie to view details.
-          </div>
-        )}
-      </div>
+      <>
+        <LoginView onLoggedIn={(user, token) => {
+          setUser(user);
+          setToken(token);
+        }} />
+        or
+        <SignupView />
+      </>
     );
-  };
+  }
+
+
+  if (selectedMovie) {
+    return (
+      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+    );
+  }
+
+  if (movies.length === 0) {
+    return <div>The list is empty!</div>;
+  }
+
+  return (
+    <div>
+      {movies.map((movie) => (
+        <MovieCard
+          key={movie._id}
+          movie={movie}
+          onMovieClick={(newSelectedMovie) => {
+            setSelectedMovie(newSelectedMovie);
+          }}
+        />
+      ))}
+      <button onClick={() => { setUser(null); }}>Logout</button>
+      {/* Adding a styled message when no movie is selected */}
+      {selectedMovie === null && (
+        <div style={{ backgroundColor: 'lightgrey', padding: '10px', margin: '5px' }}>
+          Please select a movie to view details.
+        </div>
+      )}
+    </div>
+  );
+};
