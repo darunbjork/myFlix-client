@@ -3,6 +3,8 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import Row from "react-bootstrap/Row";
+
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -74,24 +76,30 @@ export const MainView = () => {
     return <div>The list is empty!</div>;
   }
 
+
   return (
-    <div>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie._id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
-        />
-      ))}
-      <button onClick={() => { setUser(null); }}>Logout</button>
-      {/* Adding a styled message when no movie is selected */}
-      {selectedMovie === null && (
-        <div style={{ backgroundColor: 'lightgrey', padding: '10px', margin: '5px' }}>
-          Please select a movie to view details.
+    <Row>
+      <Col>
+        <div>
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie._id}
+              movie={movie}
+              onMovieClick={(newSelectedMovie) => {
+                setSelectedMovie(newSelectedMovie);
+              }}
+            />
+          ))}
+          <button onClick={() => { setUser(null); }}>Logout</button>
+          {/* Adding a styled message when no movie is selected */}
+          {selectedMovie === null && (
+            <div style={{ backgroundColor: 'lightgrey', padding: '10px', margin: '5px' }}>
+              Please select a movie to view details.
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </Col>
+    </Row>
   );
 };
+
