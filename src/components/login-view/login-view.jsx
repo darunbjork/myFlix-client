@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -32,14 +33,14 @@ const data = {
       } else {
         alert("No such user");
       }
-      
+
     })
     .catch((e) => {
       alert("Something went wrong");
     });
   };
 
-
+ 
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
