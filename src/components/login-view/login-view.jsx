@@ -20,16 +20,20 @@ const data = {
       },
       body: JSON.stringify(data)
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Login response: ", data);
+    .then((response) => {
+      //console.log("response json", response.json());
+      return response.json();
+    })
+    .then(async (data) => {
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
         onLoggedIn(data.user, data.token);
       } else {
-        alert("No such user");
+        console.log("data.user:", data.user);
+        alert("no such user");
       }
+<<<<<<< Updated upstream
       
     })
     .catch((e) => {
@@ -40,6 +44,12 @@ const data = {
   
   
 
+=======
+    })
+    .catch((err) => console.log("error", err));
+};
+ 
+>>>>>>> Stashed changes
   return (
     <form onSubmit={handleSubmit}>
       <label>
