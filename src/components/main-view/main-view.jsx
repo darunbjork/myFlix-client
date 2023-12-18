@@ -3,29 +3,24 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-<<<<<<< Updated upstream
-=======
-import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-
->>>>>>> Stashed changes
+import Col from "react-bootstrap/Col";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
-  const [user, setUser] = useState(storedUser ? storedUser : null);
-  const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [user, setUser] = useState(storedUser || null);
+  const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    if (!token) {
-    return;
-  }
+    if (!token) return;
+
     fetch("https://flixster-movies-7537569b59ac.herokuapp.com/movies", {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((response) => {
         if (!response.ok) {
@@ -40,51 +35,55 @@ export const MainView = () => {
           Description: doc.Description,
           Genre: {
             Name: doc.Genre?.Name || "",
-            Description: doc.Genre?.Description || ""
+            Description: doc.Genre?.Description || "",
           },
           Director: {
             Name: doc.Director?.Name || "",
             Bio: doc.Director?.Bio || "",
-            Birth: doc.Director?.Birth || 0
+            Birth: doc.Director?.Birth || 0,
           },
           ImageURL: doc.ImageURL,
-          Featured: doc.Featured || false
+          Featured: doc.Featured || false,
         }));
-        
+
         setMovies(moviesFromApi);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         // Handle errors or set a specific state to display an error message
       });
   }, [token]);
 
-
-if (!user) {
+  if (!user) {
     return (
       <Row className="justify-content-md-center">
         <Col md={5}>
-          <LoginView onLoggedIn={(user, token) => {
-            setUser(user);
-            setToken(token);
-          }} />
+          <LoginView
+            onLoggedIn={(user, token) => {
+              setUser(user);
+              setToken(token);
+            }}
+          />
           or
           <SignupView />
         </Col>
       </Row>
     );
   }
-  
+
   if (selectedMovie) {
     return (
-      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+      <MovieView
+        movie={selectedMovie}
+        onBackClick={() => setSelectedMovie(null)}
+      />
     );
   }
-  
+
   if (movies.length === 0) {
     return <div>The list is empty!</div>;
   }
-  
+
   return (
     <Row>
       <Col>
@@ -98,92 +97,15 @@ if (!user) {
               }}
             />
           ))}
-          <button onClick={() => { setUser(null); }}>Logout</button>
+          <button onClick={() => setUser(null)}>Logout</button>
           {/* Adding a styled message when no movie is selected */}
           {selectedMovie === null && (
-            <div style={{ backgroundColor: 'lightgrey', padding: '10px', margin: '5px' }}>
+            <div style={{ backgroundColor: "lightgrey", padding: "10px", margin: "5px" }}>
               Please select a movie to view details.
             </div>
           )}
         </div>
       </Col>
     </Row>
-  );}
-  
-
-
-
-   //Old code 
-  /*
-  if (!user) {
-    return (
-      <>
-        <LoginView onLoggedIn={(user, token) => {
-          setUser(user);
-          setToken(token);
-        }} />
-        or
-        <SignupView />
-      </>
-    );
-  }
-
-
-  if (selectedMovie) {
-    return (
-      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-    );
-  }
-
-  if (movies.length === 0) {
-    return <div>The list is empty!</div>;
-  }
-
-  return (
-<<<<<<< Updated upstream
-    <div>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie._id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
-        />
-      ))}
-      <button onClick={() => { setUser(null); }}>Logout</button>
-      {/* Adding a styled message when no movie is selected */}
-      {selectedMovie === null && (
-        <div style={{ backgroundColor: 'lightgrey', padding: '10px', margin: '5px' }}>
-          Please select a movie to view details.
-=======
-    <Row>
-      <Col>
-        <div>
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie._id}
-              movie={movie}
-              onMovieClick={(newSelectedMovie) => {
-                setSelectedMovie(newSelectedMovie);
-              }}
-            />
-          ))}
-          <button onClick={() => { setUser(null); }}>Logout</button>
-          {/* Adding a styled message when no movie is selected }
-          {selectedMovie === null && (
-            <div style={{ backgroundColor: 'lightgrey', padding: '10px', margin: '5px' }}>
-              Please select a movie to view details.
-            </div>
-          )}
->>>>>>> Stashed changes
-        </div>
-      )}
-    </div>
   );
-<<<<<<< Updated upstream
 };
-=======
-}; 
-*/
->>>>>>> Stashed changes

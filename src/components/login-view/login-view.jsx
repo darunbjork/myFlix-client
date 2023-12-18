@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -20,59 +23,49 @@ const data = {
       },
       body: JSON.stringify(data)
     })
-    .then((response) => {
-      //console.log("response json", response.json());
-      return response.json();
-    })
-    .then(async (data) => {
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Login response: ", data);
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
         onLoggedIn(data.user, data.token);
       } else {
-        console.log("data.user:", data.user);
-        alert("no such user");
+        alert("No such user");
       }
-<<<<<<< Updated upstream
-      
+
     })
     .catch((e) => {
       alert("Something went wrong");
     });
   };
 
-  
-  
-
-=======
-    })
-    .catch((err) => console.log("error", err));
-};
  
->>>>>>> Stashed changes
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          minLength={5} // Adding minLength attribute with a value of 5
           required
+          minLength="3" 
         />
-      </label>
-      <label>
-        Password:
-        <input
+      </Form.Group>
+
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          minLength={8} // Adding minLength attribute with a value of 8 for password
           required
         />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
   );
 };

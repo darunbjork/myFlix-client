@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-<<<<<<< Updated upstream
+import { Button, Card } from "react-bootstrap";
+
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
@@ -8,24 +9,6 @@ export const MovieCard = ({ movie, onMovieClick }) => {
     }}>
       {movie.Title}
     </div>
-=======
-import { Card, Button } from "react-bootstrap";
-
-export const MovieCard = ({ movie, onMovieClick }) => {
-  return (
-    <Card className="h-100">
-      <Card.Img variant="top" src={movie.ImageURL} />
-      <Card.Body>
-        <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Description}</Card.Text>
-        <Card.Text>Genre: {movie.Genre.Name}</Card.Text>
-        <Card.Text>Director: {movie.Director.Name}</Card.Text>
-        <Button onClick={() => onMovieClick(movie)} variant="link">
-          Open
-        </Button>
-      </Card.Body>
-    </Card>
->>>>>>> Stashed changes
   );
 };
 
