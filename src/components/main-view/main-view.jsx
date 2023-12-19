@@ -85,8 +85,7 @@ export const MainView = () => {
   }
 
   return (
-    <Row>
-      <Col>
+    
         <div>
           {movies.map((movie) => (
             <MovieCard
@@ -105,7 +104,8 @@ export const MainView = () => {
             </div>
           )}
         </div>
-      </Col>
-    </Row>
   );
 };
+
+
+
