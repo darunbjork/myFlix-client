@@ -27289,7 +27289,8 @@ const MainView = ()=>{
             }, undefined),
             selectedMovie === null && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 style: {
-                    backgroundColor: "lightgrey",
+                    backgroundColor: "$body-bg",
+                    color: "$body-color",
                     padding: "10px",
                     margin: "5px"
                 },
@@ -27297,7 +27298,7 @@ const MainView = ()=>{
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 102,
-                columnNumber: 13
+                columnNumber: 12
             }, undefined)
         ]
     }, void 0, true, {

@@ -99,9 +99,10 @@ export const MainView = () => {
           <button onClick={() => setUser(null)}>Logout</button>
           {/* Adding a styled message when no movie is selected */}
           {selectedMovie === null && (
-            <div style={{ backgroundColor: "lightgrey", padding: "10px", margin: "5px" }}>
-              Please select a movie to view details.
-            </div>
+           <div style={{ backgroundColor: "$body-bg", color: "$body-color", padding: "10px", margin: "5px" }}>
+           Please select a movie to view details.
+         </div>
+         
           )}
         </div>
   );
