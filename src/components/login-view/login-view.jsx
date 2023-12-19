@@ -4,38 +4,35 @@ import { Form, Button, Col, Row, Container, Card, CardBody, CardTitle } from "re
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const handleSubmit = (event) => {
     event.preventDefault();
-
+  
 const name = encodeURIComponent(username);
 const userPassword = encodeURIComponent(password);
   
-    fetch("https://flixster-movies-7537569b59ac.herokuapp.com/login?Usernaame=${name}&password=${userPassword}", {
+    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/login?Usernaame=${name}&password=${userPassword}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: {}
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Login response: ", data);
-      if (data.user) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("token", data.token);
-        onLoggedIn(data.user, data.token);
-      } else {
-        alert("No such user");
-      }
-
-    })
-    .catch((e) => {
-      alert("Something went wrong");
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Login response: ", data);
+        if (data.user) {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("token", data.token);
+          onLoggedIn(data.user, data.token);
+        } else {
+          alert("No such user");
+        }
+      })
+      .catch((e) => {
+        alert("Something went wrong");
+      });
   };
-
-
+  
 return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
@@ -63,4 +60,4 @@ return (
       </Button>
     </Form>
   );
-};
+}; 
