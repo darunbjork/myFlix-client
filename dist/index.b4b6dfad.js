@@ -41646,7 +41646,7 @@ const LoginView = ({ onLoggedIn })=>{
         event.preventDefault();
         const name = encodeURIComponent(username);
         const userPassword = encodeURIComponent(password);
-        fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/login?Usernaame=${name}&password=${userPassword}`, {
+        fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/login?Username=${name}&Password=${userPassword}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
