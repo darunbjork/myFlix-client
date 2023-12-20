@@ -69,28 +69,24 @@ export const MainView = () => {
       </Row>
     );
   }
-if (!user) {
-    return (
-      <Row className="justify-content-md-center">
-        <Col md={5}>
-          <LoginView onLoggedIn={(user) => setUser(user)} />
-          or
-          <SignupView />
-        </Col>
-      </Row>
-    );
-  }
 
   if (selectedMovie) {
     return (
-      <Row className="justify-content-md-center">
-        <Col md={8}>
-          <MovieView
-            movie={selectedMovie}
-            onBackClick={() => setSelectedMovie(null)}
-          />
-        </Col>
-      </Row>
+      <>
+        <Row className="justify-content-md-center mb-3">
+          <Col md={12}>
+            <Button onClick={() => setUser(null)}>Logout</Button>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Col md={8}>
+            <MovieView
+              movie={selectedMovie}
+              onBackClick={() => setSelectedMovie(null)}
+            />
+          </Col>
+        </Row>
+      </>
     );
   }
 
@@ -105,25 +101,33 @@ if (!user) {
   }
 
   return (
-    <Row className="justify-content-md-center">
-      {movies.map((movie) => (
-        <Col key={movie._id} md={3}>
-          <MovieCard
-            movie={movie}
-            onMovieClick={(newSelectedMovie) => {
-              setSelectedMovie(newSelectedMovie);
-            }}
-          />
+    <>
+      <Row className="justify-content-md-center mb-3">
+        <Col md={12}>
+          <Button onClick={() => setUser(null)}>Logout</Button>
         </Col>
-      ))}
-      <Col md={12}>
-        <Button onClick={() => setUser(null)}>Logout</Button>
-        {selectedMovie === null && (
-          <div className="message">
-            Please select a movie to view details.
-          </div>
-        )}
-      </Col>
+      </Row>
+      <Row className="justify-content-md-center">
+        <Col md={12}>
+          {selectedMovie === null && (
+            <div className="message">
+              Please select a movie to view details.
+            </div>
+          )}
+        </Col>
+      </Row>
+      <Row className="justify-content-md-center">
+        {movies.map((movie) => (
+          <Col key={movie._id} md={3}>
+            <MovieCard
+              movie={movie}
+              onMovieClick={(newSelectedMovie) => {
+                setSelectedMovie(newSelectedMovie);
+              }}
+            />
+          </Col>
+        ))}
+      </Row>
       <style>
         {`
           .message {
@@ -136,7 +140,6 @@ if (!user) {
           }
         `}
       </style>
-    </Row>
+    </>
   );
 };
-
