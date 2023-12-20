@@ -119,11 +119,24 @@ if (!user) {
       <Col md={12}>
         <Button onClick={() => setUser(null)}>Logout</Button>
         {selectedMovie === null && (
-          <div>
+          <div className="message">
             Please select a movie to view details.
           </div>
         )}
       </Col>
+      <style>
+        {`
+          .message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: black;
+            padding: 10px;
+          }
+        `}
+      </style>
     </Row>
   );
 };
+

@@ -27361,6 +27361,7 @@ const MainView = ()=>{
                         columnNumber: 9
                     }, undefined),
                     selectedMovie === null && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "message",
                         children: "Please select a movie to view details."
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
@@ -27371,6 +27372,22 @@ const MainView = ()=>{
             }, void 0, true, {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 119,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("style", {
+                children: `
+          .message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: black;
+            padding: 10px;
+          }
+        `
+            }, void 0, false, {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 127,
                 columnNumber: 7
             }, undefined)
         ]
@@ -30889,7 +30906,7 @@ $RefreshReg$(_c, "MovieView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"748uj","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4CEkC","react-bootstrap/Col":"2L2I6","./movie-view.scss":"jnlR5"}],"jnlR5":[function() {},{}],"9YtA0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-bootstrap/Col":"2L2I6","./movie-view.scss":"jnlR5","@parcel/transformer-js/src/esmodule-helpers.js":"748uj","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4CEkC"}],"jnlR5":[function() {},{}],"9YtA0":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
