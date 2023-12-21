@@ -1,0 +1,27 @@
+$primary: orange;
+$body-bg: black;
+$body-color: white;
+
+.navbar {
+  background-color: $body-bg;
+
+  .navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: $primary; /* Change the brand color */
+  }
+
+  .navbar-collapse {
+    justify-content: flex-end;
+
+    .nav-link {
+      margin-right: 15px;
+      color: $primary;
+
+      &:hover {
+        text-decoration: none;
+        color: lighten($primary, 15%); /* Lighten the color on hover */
+      }
+    }
+  }
+}

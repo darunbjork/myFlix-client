@@ -1,47 +1,39 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-
+import { Form, Button, Col, Row, Container, Card, CardBody, CardTitle } from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const handleSubmit = (event) => {
-    // this prevents the default behavior of the form which is to reload the entire page
     event.preventDefault();
-
-const data = {
-      Username: username,
-      Password: password
-    };
   
-    fetch("https://flixster-movies-7537569b59ac.herokuapp.com/login", {
+const name = encodeURIComponent(username);
+const userPassword = encodeURIComponent(password);
+  
+    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/login?Username=${name}&Password=${userPassword}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(data)
+      body: {}
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Login response: ", data);
-      if (data.user) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("token", data.token);
-        onLoggedIn(data.user, data.token);
-      } else {
-        alert("No such user");
-      }
-
-    })
-    .catch((e) => {
-      alert("Something went wrong");
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Login response: ", data);
+        if (data.user) {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("token", data.token);
+          onLoggedIn(data.user, data.token);
+        } else {
+          alert("No such user");
+        }
+      })
+      .catch((e) => {
+        alert("Something went wrong");
+      });
   };
-
- 
-  return (
+  
+return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
@@ -68,4 +60,4 @@ const data = {
       </Button>
     </Form>
   );
-};
+}; 
