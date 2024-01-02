@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import './movie-card.scss';
+ 
 
-export const MovieCard = ({ movie, onMovieClick, isFavorite, toggleFavorite }) => {
+export const MovieCard = ({ movie, onMovieClick, isFavorite }) => {
   return (
     <Card>
       <Card.Img variant="top" src={movie.ImageURL} />
@@ -14,9 +16,6 @@ export const MovieCard = ({ movie, onMovieClick, isFavorite, toggleFavorite }) =
           <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
             <Button variant="primary" onClick={() => onMovieClick(movie)}>Open</Button>
           </Link>
-          <Button variant={isFavorite ? 'danger' : 'primary'} onClick={toggleFavorite}>
-            {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-          </Button>
         </div>
       </Card.Body>
     </Card>
@@ -42,5 +41,4 @@ MovieCard.propTypes = {
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  toggleFavorite: PropTypes.func.isRequired,
 };

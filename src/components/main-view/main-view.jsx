@@ -4,8 +4,9 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
-import { Row, Col, Container } from 'react-bootstrap';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
+import { ProfileView } from '../profile-view/profile-view';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -16,91 +17,195 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    if (token) {
-      fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/movies`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          const moviesFromApi = data.map((doc) => ({
-            _id: doc._id,
-            Title: doc.Title,
-            Description: doc.Description,
-            Genre: {
-              Name: doc.Genre?.Name || '',
-              Description: doc.Genre?.Description || '',
-            },
-            Director: {
-              Name: doc.Director?.Name || '',
-              Bio: doc.Director?.Bio || '',
-              Birth: doc.Director?.Birth || 0,
-            },
-            ImageURL: doc.ImageURL,
-            Featured: doc.Featured || false,
-          }));
+    if (!token) return;
 
-          setMovies(moviesFromApi);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-    }
+    fetch('https://flixster-movies-7537569b59ac.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const moviesFromApi = data.map((movie) => ({
+          _id: movie._id,
+          Title: movie.Title,
+          Description: movie.Description,
+          Genre: {
+            Name: movie.Genre?.Name || '',
+            Description: movie.Genre?.Description || '',
+          },
+          Director: {
+            Name: movie.Director?.Name || '',
+            Bio: movie.Director?.Bio || '',
+            Birth: movie.Director?.Birth || 0,
+          },
+          ImageURL: movie.ImageURL,
+          Featured: movie.Featured || false,
+        }));
+        setMovies(moviesFromApi);
+      })
+      .catch((error) => {
+        console.error('Error fetching movies:', error);
+      });
   }, [token]);
 
-  return (
+  // Add Favorite Movie
+  const addFav = (id) => {
+    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.username}/movies/${id}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Failed to add');
+        }
+      })
+      .then((userData) => {
+        if (userData) {
+          localStorage.setItem('user', JSON.stringify(userData));
+          setUser(userData);
+        }
+      })
+      .catch((error) => {
+        console.error('Error adding favorite:', error);
+        alert('Failed to add');
+      });
+  };
+
+  // Remove Favorite Movie
+  const removeFav = (id) => {
+    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.username}/movies/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Failed to remove');
+        }
+      })
+      .then((userData) => {
+        if (userData) {
+          localStorage.setItem('user', JSON.stringify(userData));
+          setUser(userData);
+        }
+      })
+      .catch((error) => {
+        console.error('Error removing favorite:', error);
+        alert('Failed to remove');
+      });
+  };
+ return (
     <Router>
-      <NavigationBar user={user} onLoggedOut={() => setUser(null)} />
-      <Container className="main-container">
-        <Routes>
-          <Route
-            path="/movies/:movieId"
-            element={<MovieView movies={movies} onBackClick={() => setSelectedMovie(null)} />}
-          />
-          <Route
-            path="/login"
-            element={<LoginView onLoggedIn={(userData, userToken) => {
-              setUser(userData);
-              setToken(userToken);
-            }} />}
-          />
-          <Route
-            path="/signup"
-            element={<SignupView />}
-          />
-          <Route
-            path="/"
-            element={
-              <>
-                {user ? (
-                  <>
-                    {selectedMovie === null && (
-                      <div className="message">Please select a movie to view details.</div>
-                    )}
-                    <Row className="justify-content-md-center">
+      <NavigationBar
+        user={user}
+        onLoggedOut={() => {
+          setUser(null);
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+        }}
+      />
+      <Container>
+        <Row className="justify-content-center my-5">
+          <Routes>
+            <Route path="/signup" element={<SignupView />} />
+            <Route
+              path="/login"
+              element={
+                <>
+                  {user ? (
+                    <Navigate to="/" />
+                  ) : (
+                    <Col md={5}>
+                      <LoginView
+                        onLoggedIn={(userData, userToken) => {
+                          setUser(userData);
+                          setToken(userToken);
+                        }}
+                      />
+                    </Col>
+                  )}
+                </>
+              }
+            />
+            <Route
+              path="/movies/:movieId"
+              element={
+                <>
+                  {!user ? (
+                    <Navigate to="/login" replace />
+                  ) : movies.length === 0 ? (
+                    <Col>There are no movies</Col>
+                  ) : (
+                    <Col md={12}>
+                      <MovieView
+                        movies={movies}
+                        removeFav={removeFav}
+                        addFav={addFav}
+                      />
+                    </Col>
+                  )}
+                </>
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <>
+                  {!user ? (
+                    <Navigate to="/login" replace />
+                  ) : movies.length === 0 ? (
+                    <Col>The list is empty</Col>
+                  ) : (
+                    <>
                       {movies.map((movie) => (
                         <Col key={movie._id} md={4} lg={3} className="movie-card-col">
                           <MovieCard
                             movie={movie}
-                            onMovieClick={(newSelectedMovie) => setSelectedMovie(newSelectedMovie)}
+                            onMovieClick={(newSelectedMovie) => {
+                              // Handle the selection of a movie
+                              // Example: setSelectedMovie(newSelectedMovie)
+                            }}
                           />
                         </Col>
                       ))}
-                    </Row>
-                  </>
-                ) : (
-                  <Navigate to="/login" replace />
-                )}
-              </>
-            }
-          />
-        </Routes>
+                    </>
+                  )}
+                </>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <>
+                  {!user ? (
+                    <Navigate to="/login" replace />
+                  ) : (
+                    <Col>
+                      <ProfileView
+                        user={user}
+                        movies={movies}
+                        removeFav={removeFav}
+                        addFav={addFav}
+                        setUser={setUser}
+                      />
+                    </Col>
+                  )}
+                </>
+              }
+            />
+          </Routes>
+        </Row>
       </Container>
     </Router>
   );

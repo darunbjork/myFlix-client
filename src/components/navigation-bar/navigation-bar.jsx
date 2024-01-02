@@ -4,23 +4,30 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './navigation.scss';
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
+  const handleLogout = () => {
+    // Call onLoggedOut function when logout is clicked
+    if (typeof onLoggedOut === 'function') {
+      onLoggedOut(); // Call the logout function passed from the parent component
+    }
+  };
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Navbar.Brand as={Link} to="/">
-      FLIXSTER
+        FLIXSTER
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link as={Link} to="/movies">
-            All Movies
+           
           </Nav.Link>
           {user && (
             <>
               <Nav.Link as={Link} to="/profile">
                 Profile
               </Nav.Link>
-              <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
             </>
           )}
         </Nav>

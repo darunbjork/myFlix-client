@@ -1,13 +1,64 @@
-.back-button {
-    padding: 4px 12px;
-    color: whitesmoke;
-    background-color: dodgerblue;
-    border: none;
-    border-radius: 4px;
+$primary: orange;
+$primary-hover: darkorange;
+$button-text-color: white;
+
+.custom-button {
+  padding: 4px 12px;
+  color: $button-text-color;
+  background-color: $primary;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+
+  &:hover,
+  &:focus {
+    background-color: $primary-hover;
   }
+}
+
+.back-button,
+.add-favorite-button,
+.delete-favorite-button {
+  padding: 4px 12px;
+  color: $button-text-color;
+  background-color: $primary;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
   
-  .back-button:hover,
-  .back-button:focus {
-    background-color: royalblue;
+  &:hover,
+  &:focus {
+    background-color: $primary-hover;
   }
-  
+}
+
+.movie-details {
+  margin-top: 20px;
+  padding-left: 20px; /* Added paddingLeft here */
+
+  .movie-card-text {
+    margin-top: 20px; /* Adjust as needed for vertical space between image and text */
+  }
+}
+
+.card {
+  position: relative;
+
+  &:hover {
+    .card-img-top {
+      transform: scale(1.05) translateX(10px);
+      filter: brightness(70%);
+      transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+    }
+  }
+
+  .card-img-top {
+    transition: transform 0.5s ease;
+  }
+}
