@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Button, Col, Row, Container, Card, CardBody, CardTitle } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -8,8 +8,8 @@ export const LoginView = ({ onLoggedIn }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
   
-const name = encodeURIComponent(username);
-const userPassword = encodeURIComponent(password);
+    const name = encodeURIComponent(username);
+    const userPassword = encodeURIComponent(password);
   
     fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/login?Username=${name}&Password=${userPassword}`, {
       method: "POST",
@@ -34,7 +34,7 @@ const userPassword = encodeURIComponent(password);
       });
   };
   
-return (
+  return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
@@ -43,7 +43,8 @@ return (
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          minLength="3" 
+          minLength="3"
+          autoComplete="username"
         />
       </Form.Group>
 
@@ -54,6 +55,7 @@ return (
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          autoComplete="current-password"
         />
       </Form.Group>
       <Button variant="primary" type="submit">
@@ -61,4 +63,4 @@ return (
       </Button>
     </Form>
   );
-}; 
+};

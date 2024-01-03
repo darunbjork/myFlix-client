@@ -1,5 +1,3 @@
-// MovieView.jsx
-
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
@@ -29,6 +27,18 @@ export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }
 
   const handleDeleteFavorite = () => {
     deleteFavorite(movie._id);
+  };
+
+  const handleAddFavoriteMovie = () => {
+    // Implement the logic to add the current movie as a favorite
+    console.log('Adding movie to favorites...');
+    // Call the toggleFavorite function or any relevant function here
+  };
+
+  const handleDeleteFavoriteMovie = () => {
+    // Implement the logic to delete the current movie from favorites
+    console.log('Deleting movie from favorites...');
+    // Call the deleteFavorite function or any relevant function here
   };
 
   return (
@@ -75,8 +85,12 @@ export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }
               </div>
             )}
             {/* Custom buttons */}
-            <Button className="custom-button">Add Favorite Movie</Button>
-            <Button className="custom-button" variant="danger">Delete Favorite Movie</Button>
+            <Button className="custom-button" onClick={handleAddFavoriteMovie}>
+              Add Favorite Movie
+            </Button>
+            <Button className="custom-button" variant="danger" onClick={handleDeleteFavoriteMovie}>
+              Delete Favorite Movie
+            </Button>
           </div>
         </div>
       </div>

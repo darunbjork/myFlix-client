@@ -9,11 +9,25 @@ $link-hover: lighten($primary, 15%); /* Calculating hover color */
 /* Navigation bar styles */
 .navbar {
   background-color: $body-bg;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: $link-hover; /* Change background color on hover */
+  }
 
   .navbar-brand {
     font-size: 24px;
     font-weight: bold;
     color: $primary; /* Change the brand color */
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: $body-color; /* Change brand color on hover */
+    }
+  }
+
+  .navbar-toggler-icon {
+    background-color: $primary; /* Toggler icon color */
   }
 
   .navbar-collapse {
@@ -24,10 +38,11 @@ $link-hover: lighten($primary, 15%); /* Calculating hover color */
       color: $primary;
       font-size: 18px; /* Adjust link font size */
       text-transform: uppercase; /* Uppercase text */
+      transition: color 0.3s ease-in-out;
 
       &:hover {
         text-decoration: none;
-        color: $link-hover; /* Apply hover color */
+        color: $body-color; /* Change link color on hover */
       }
     }
 

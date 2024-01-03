@@ -14,24 +14,18 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Navbar.Brand as={Link} to="/">
-        FLIXSTER
+        Movies
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link as={Link} to="/movies">
-           
-          </Nav.Link>
           {user && (
-            <>
-              <Nav.Link as={Link} to="/profile">
-                Profile
-              </Nav.Link>
-              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-            </>
+            <Nav.Link as={Link} to="/profile">
+              Profile
+            </Nav.Link>
           )}
         </Nav>
-        <Nav className="ms-auto">
+        <Nav>
           {!user ? (
             <>
               <Nav.Link as={Link} to="/login">
@@ -41,7 +35,9 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                 Signup
               </Nav.Link>
             </>
-          ) : null}
+          ) : (
+            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+          )}
         </Nav>
         <Nav className="d-lg-none">
           <Nav.Link href="#search">

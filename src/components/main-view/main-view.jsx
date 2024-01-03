@@ -105,6 +105,8 @@ export const MainView = () => {
         alert('Failed to remove');
       });
   };
+
+  
  return (
     <Router>
       <NavigationBar
@@ -209,4 +211,4 @@ export const MainView = () => {
       </Container>
     </Router>
   );
-};
+}; 

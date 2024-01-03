@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, FormControl, FormGroup, FormLabel, Alert, Spinner } from 'react-bootstrap';
 
-export const ProfileView = ({ user, token, movies, setUser }) => {
-  const [userData, setUserData] = useState({ ...user });
+export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
+  const [userData, setUserData] = useState({ ...loggedInUser });
   const [loading, setLoading] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [updateError, setUpdateError] = useState(null);
@@ -10,15 +10,15 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
   const [deleteError, setDeleteError] = useState(null);
 
   useEffect(() => {
-    setUserData({ ...user });
-  }, [user]);
+    setUserData({ ...loggedInUser });
+  }, [loggedInUser]);
 
   const handleUpdate = async (event) => {
     event.preventDefault();
     setLoading(true);
 
     try {
-      const response = await fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.username}`, {
+      const response = await fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${loggedInUser.username}`, {
         method: 'PUT',
         body: JSON.stringify(userData),
         headers: {
@@ -53,7 +53,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
       setLoading(true);
 
       try {
-        const response = await fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.username}`, {
+        const response = await fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${loggedInUser.username}`, {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -143,10 +143,10 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
         <Col md={6}>
           <h2 className="profile-title">Your Information</h2>
           <div>
-            <p><strong>Username:</strong> {user.username}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Birthday:</strong> {user.birthday}</p>
-            {/* Display other user information */}
+            <p><strong>Username:</strong> {loggedInUser.username}</p>
+            <p><strong>Email:</strong> {loggedInUser.email}</p>
+            <p><strong>Birthday:</strong> {loggedInUser.birthday}</p>
+
           </div>
         </Col>
       </Row>

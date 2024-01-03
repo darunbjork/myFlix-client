@@ -62,3 +62,21 @@ $button-text-color: white;
     transition: transform 0.5s ease;
   }
 }
+
+
+.movie-card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-card-image img {
+  transition: transform 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease;
+  width: 22%; /* Ensures the image fills its container */
+  height: 5%; /* Maintains aspect ratio */
+}
+
+.movie-card:hover img {
+  transform: scale(1.2) rotate(20deg) translate(10px, 10px);
+  filter: brightness(70%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
