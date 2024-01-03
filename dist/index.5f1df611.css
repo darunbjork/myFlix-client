@@ -70,6 +70,44 @@
   box-shadow: 0 8px 16px #0003;
 }
 
+@keyframes sparkle {
+  0% {
+    background-position: -200px;
+  }
+
+  100% {
+    background-position: 200px;
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.sparkle-form {
+  background-image: linear-gradient(to right, #ffffff1a 2%, #0000 70%);
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  animation: 1s linear infinite alternate sparkle, pulse;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+.sparkle-form button {
+  margin-top: 10px;
+}
+
 .navbar {
   background-color: #000;
   transition: background-color .3s ease-in-out;

@@ -112,6 +112,7 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
                 type="password"
                 value={userData.password}
                 onChange={(e) => handleInputChange('password', e.target.value)}
+                autoComplete="current-password"
               />
             </FormGroup>
             <FormGroup>
@@ -120,6 +121,7 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
                 type="email"
                 value={userData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
+                autoComplete="email" 
               />
             </FormGroup>
             <FormGroup>
@@ -128,6 +130,7 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
                 type="text"
                 value={userData.birthday}
                 onChange={(e) => handleInputChange('birthday', e.target.value)}
+                autoComplete="bday" 
               />
             </FormGroup>
             <div className="d-grid gap-2" style={{ marginTop: '10px' }}>
@@ -146,7 +149,6 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
             <p><strong>Username:</strong> {loggedInUser.username}</p>
             <p><strong>Email:</strong> {loggedInUser.email}</p>
             <p><strong>Birthday:</strong> {loggedInUser.birthday}</p>
-
           </div>
         </Col>
       </Row>

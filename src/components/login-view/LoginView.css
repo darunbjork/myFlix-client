@@ -1,0 +1,37 @@
+@keyframes sparkle {
+    0% {
+      background-position: -200px;
+    }
+    100% {
+      background-position: 200px;
+    }
+  }
+  
+  @keyframes pulse {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+    50% {
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .sparkle-form {
+    /* Example styles for sparkle effect */
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 2%, transparent 70%);
+    animation: sparkle 1s linear infinite alternate, pulse; /* Combine sparkle and pulse animations */
+    padding: 20px; /* Adjust as needed */
+    border-radius: 10px; /* Rounded corners for the form */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    margin: 20px auto; /* Centering the form */
+    max-width: 400px; /* Example maximum width for the form */
+  }
+  
+  /* Style the button */
+  .sparkle-form button {
+    margin-top: 10px; /* Adjust spacing */
+  }
+  

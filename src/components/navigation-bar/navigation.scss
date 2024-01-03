@@ -1,10 +1,17 @@
-/* navigation.scss */
-
-/* Define custom colors */
 $primary: orange;
 $body-bg: black;
 $body-color: white;
 $link-hover: lighten($primary, 15%); /* Calculating hover color */
+
+/* Add this CSS to your navigation.scss file */
+.navbar.enlarge-on-hover {
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar.enlarge-on-hover:hover {
+  transform: scale(1.05); /* Adjust the scale as needed */
+}
+
 
 /* Navigation bar styles */
 .navbar {
