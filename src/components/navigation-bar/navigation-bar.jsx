@@ -1,11 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import { Navbar, Nav, NavbarText } from 'react-bootstrap';
+import React, { useEffect, useRef, useState } from 'react';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './navigation.scss';
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, onGenreSearch }) => {
   const textRef = useRef(null);
-  const colors = ['#ff6347', '#ffd700', '#7fff00', '#40e0d0', '#9370db']; // Define your colors here
+  const colors = ['#ff6347', '#ffd700', '#7fff00', '#40e0d0', '#9370db']; 
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     let currentIndex = 0;
@@ -16,14 +17,21 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
       currentIndex = (currentIndex + 1) % colors.length;
     };
 
-    const interval = setInterval(changeColor, 1000); // Change color every second (adjust as needed)
+    const interval = setInterval(changeColor, 1000);
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
   }, []);
 
   const handleLogout = () => {
     if (typeof onLoggedOut === 'function') {
       onLoggedOut();
+    }
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (typeof onGenreSearch === 'function') {
+      onGenreSearch(searchTerm);
     }
   };
 
@@ -41,16 +49,27 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
             </Nav.Link>
           )}
         </Nav>
-        <Nav className="d-lg-none">
-          <Nav.Link href="#search">
-            <i className="bi bi-search"></i>
-          </Nav.Link>
-        </Nav>
-        <NavbarText ref={textRef} className="navbar-text d-none d-lg-block flex-fill text-center">
-        Explore Your Favorite Films
-        </NavbarText>
+        <Navbar.Text ref={textRef} className="navbar-text d-none d-lg-block flex-fill text-center">
+          Explore Your Favorite Films
+        </Navbar.Text>
         <Nav>
-          {!user ? (
+          {user ? (
+            <>
+              <Form onSubmit={handleSearch} className="d-flex me-2">
+                <FormControl
+                  type="text"
+                  placeholder="Search by Genre"
+                  className="me-2"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Button variant="outline-info" type="submit">
+                  Search
+                </Button>
+              </Form>
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            </>
+          ) : (
             <>
               <Nav.Link as={Link} to="/login">
                 Login
@@ -59,11 +78,11 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                 Signup
               </Nav.Link>
             </>
-          ) : (
-            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
 };
+
+export default NavigationBar;

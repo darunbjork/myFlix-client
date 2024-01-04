@@ -34,32 +34,34 @@ export const LoginView = ({ onLoggedIn }) => {
         alert("Something went wrong");
       });
   };
+
+  
   return (
     <div className="login-container">
       <div className="login-form-container">
         <Form onSubmit={handleSubmit} className="sparkle-form">
-          <Form.Group controlId="formUsername">
-            <Form.Label>Username:</Form.Label>
-            <Form.Control
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              minLength="3"
-              autoComplete="username"
-            />
-          </Form.Group>
+        <Form.Group controlId="formUsername">
+  <Form.Label>Username:</Form.Label>
+  <Form.Control
+    type="text"
+    value={username}
+    onChange={(e) => setUsername(e.target.value)}
+    required
+    minLength="3"
+    autoComplete="username"
+  />
+</Form.Group>
+<Form.Group controlId="formPassword">
+  <Form.Label>Password:</Form.Label>
+  <Form.Control
+    type="password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    required
+    autoComplete="current-password"
+  />
+</Form.Group>
 
-          <Form.Group controlId="formPassword">
-            <Form.Label>Password:</Form.Label>
-            <Form.Control
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              autoComplete="current-password"
-            />
-          </Form.Group>
           <Button variant="primary" type="submit">
             Submit
           </Button>

@@ -155,3 +155,4 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
     </Container>
   );
 };
+

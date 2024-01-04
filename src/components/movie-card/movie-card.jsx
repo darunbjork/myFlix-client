@@ -52,7 +52,7 @@ MovieCard.propTypes = {
     Featured: PropTypes.bool.isRequired,
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
+  isFavorite: PropTypes.bool, // Marked as optional
 };
 
 export default MovieCard;

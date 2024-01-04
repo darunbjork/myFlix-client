@@ -146,6 +146,108 @@
   margin-top: 10px;
 }
 
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 10px #fff;
+  }
+
+  50% {
+    box-shadow: 0 0 20px 5px #fff;
+  }
+
+  100% {
+    box-shadow: 0 0 10px #fff;
+  }
+}
+
+.login-form-container {
+  background-image: linear-gradient(to right, #ffffff1a 2%, #0000 70%);
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  animation: 3s linear infinite borderGlow;
+  position: relative;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+.login-form-container input[type="text"], .login-form-container input[type="password"] {
+  border: 1px solid #fff;
+  border-radius: 3px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px;
+}
+
+.login-form-container button[type="submit"] {
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  padding: 8px;
+}
+
+.signup-container {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  position: relative;
+}
+
+.signup-container {
+  border-radius: 5px;
+  padding: 20px;
+  animation: 3s linear infinite borderGlow;
+  position: relative;
+}
+
+.signup-container input[type="text"], .signup-container input[type="password"], .signup-container input[type="email"], .signup-container input[type="date"], .signup-container button[type="submit"] {
+  border: 1px solid #fff;
+  border-radius: 3px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px;
+}
+
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 10px #fff;
+  }
+
+  50% {
+    box-shadow: 0 0 20px 5px #fff;
+  }
+
+  100% {
+    box-shadow: 0 0 10px #fff;
+  }
+}
+
+.welcome-text {
+  color: #333;
+  text-shadow: 1px 1px 2px #ccc;
+  margin-bottom: 10px;
+  font-size: 2em;
+}
+
+.create-account-text {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.signup-container button[type="submit"] {
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  padding: 8px;
+}
+
 .navbar.enlarge-on-hover {
   transition: transform .3s ease-in-out;
 }

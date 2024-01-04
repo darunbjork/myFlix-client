@@ -15,6 +15,14 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const handleGenreSearch = (searchTerm) => {
+    // Logic for handling genre search based on the searchTerm
+    // For example:
+    console.log(`Genre search term: ${searchTerm}`);
+    // Perform the desired actions with the search term
+  };
+  
+
 
   useEffect(() => {
     if (!token) return;
@@ -106,8 +114,8 @@ export const MainView = () => {
       });
   };
 
-  
- return (
+
+  return (
     <Router>
       <NavigationBar
         user={user}
@@ -116,6 +124,7 @@ export const MainView = () => {
           localStorage.removeItem('token');
           localStorage.removeItem('user');
         }}
+        onGenreSearch={handleGenreSearch} // Pass the onGenreSearch function as a prop
       />
       <Container>
         <Row className="justify-content-center my-5">
@@ -211,4 +220,4 @@ export const MainView = () => {
       </Container>
     </Router>
   );
-}; 
+            }
