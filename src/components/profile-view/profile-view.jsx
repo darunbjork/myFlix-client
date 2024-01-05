@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, FormControl, FormGroup, FormLabel, Alert, Spinner } from 'react-bootstrap';
 
 export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
-  const [userData, setUserData] = useState({ ...loggedInUser });
+  const [userData, setUserData] = useState({
+    username: loggedInUser.username || '',
+    password: '',
+    email: loggedInUser.email || '',
+    birthday: loggedInUser.birthday || '',
+  });
   const [loading, setLoading] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [updateError, setUpdateError] = useState(null);
@@ -10,7 +15,12 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
   const [deleteError, setDeleteError] = useState(null);
 
   useEffect(() => {
-    setUserData({ ...loggedInUser });
+    setUserData({
+      username: loggedInUser.username || '',
+      password: '',
+      email: loggedInUser.email || '',
+      birthday: loggedInUser.birthday || '',
+    });
   }, [loggedInUser]);
 
   const handleUpdate = async (event) => {
@@ -87,6 +97,7 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
     }));
   };
 
+
   return (
     <Container>
       <Row className="justify-content-md-center mx-3 my-4">
@@ -104,6 +115,7 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
                 type="text"
                 value={userData.username}
                 onChange={(e) => handleInputChange('username', e.target.value)}
+                autoComplete="username"
               />
             </FormGroup>
             <FormGroup>
@@ -134,7 +146,7 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
               />
             </FormGroup>
             <div className="d-grid gap-2" style={{ marginTop: '10px' }}>
-              <Button variant="primary" type="submit" style={{ marginBottom: '10px' }}>
+              <Button variant="primary" type="submit" style={{ marginBottom: '10px' }} onClick={handleUpdate}>
                 {loading ? <Spinner animation="border" size="sm" /> : 'Update'}
               </Button>
               <Button variant="danger" onClick={handleDelete} style={{ marginBottom: '10px' }}>
@@ -156,3 +168,4 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser }) => {
   );
 };
 
+export default ProfileView;

@@ -28,12 +28,15 @@ export const NavigationBar = ({ user, onLoggedOut, onGenreSearch }) => {
     }
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (typeof onGenreSearch === 'function') {
-      onGenreSearch(searchTerm);
-    }
-  };
+  // Inside NavigationBar component
+const handleSearch = (e) => {
+  e.preventDefault();
+  if (typeof onGenreSearch === 'function') {
+    onGenreSearch(searchTerm);
+    setSearchTerm(''); // Clear search term after search
+  }
+};
+
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="enlarge-on-hover">

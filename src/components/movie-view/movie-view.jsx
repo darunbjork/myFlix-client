@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import './movie-view.scss'; // Import SCSS file for styling
@@ -29,17 +29,28 @@ export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }
     deleteFavorite(movie._id);
   };
 
-  const handleAddFavoriteMovie = () => {
-    // Implement the logic to add the current movie as a favorite
-    console.log('Adding movie to favorites...');
-    // Call the toggleFavorite function or any relevant function here
-  };
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
 
-  const handleDeleteFavoriteMovie = () => {
-    // Implement the logic to delete the current movie from favorites
-    console.log('Deleting movie from favorites...');
-    // Call the deleteFavorite function or any relevant function here
+
+  const handleAddFavoriteMovie = () => {
+    // Check if the movie is already in favorites to avoid duplicates
+    if (!favoriteMovies.some((movieItem) => movieItem._id === movie._id)) {
+      // Add the current movie to favorites
+      setFavoriteMovies([...favoriteMovies, movie]);
+      console.log('Adding movie to favorites...');
+    } else {
+      console.log('Movie already in favorites!');
+    }
   };
+  
+  const handleDeleteFavoriteMovie = () => {
+    // Filter out the current movie from favorites
+    const updatedFavorites = favoriteMovies.filter((movieItem) => movieItem._id !== movie._id);
+    setFavoriteMovies(updatedFavorites);
+    console.log('Deleting movie from favorites...');
+  };
+  
+
 
   return (
     <div className="movie-view-container">

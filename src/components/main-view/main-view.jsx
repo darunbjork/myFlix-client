@@ -15,13 +15,9 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const handleGenreSearch = (searchTerm) => {
-    // Logic for handling genre search based on the searchTerm
-    // For example:
-    console.log(`Genre search term: ${searchTerm}`);
-    // Perform the desired actions with the search term
-  };
-  
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredMovies, setFilteredMovies] = useState([]);
+
 
 
   useEffect(() => {
@@ -113,6 +109,20 @@ export const MainView = () => {
         alert('Failed to remove');
       });
   };
+  
+  // Function to handle genre search
+const handleGenreSearch = (event) => {
+  event.preventDefault();
+  const genreToSearch = searchTerm.toLowerCase();
+
+  // Filter movies based on the genre
+  const filtered = movies.filter((movie) =>
+    movie.Genre.Name.toLowerCase().includes(genreToSearch)
+  );
+
+  setFilteredMovies(filtered);
+};
+
 
 
   return (
