@@ -42,14 +42,14 @@ export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }
       console.log('Movie already in favorites!');
     }
   };
-  
+
   const handleDeleteFavoriteMovie = () => {
     // Filter out the current movie from favorites
     const updatedFavorites = favoriteMovies.filter((movieItem) => movieItem._id !== movie._id);
     setFavoriteMovies(updatedFavorites);
     console.log('Deleting movie from favorites...');
   };
-  
+
 
 
   return (
@@ -83,28 +83,12 @@ export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }
             <Button className="back-button" onClick={handleBackClick}>
               Back
             </Button>
-            {isFavorite !== undefined && (
-              <div>
-                <Button className="add-favorite-button" onClick={handleToggleFavorite}>
-                  {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-                </Button>
-                {isFavorite && (
-                  <Button className="delete-favorite-button" variant="danger" onClick={handleDeleteFavorite}>
-                    Delete
-                  </Button>
-                )}
-              </div>
-            )}
+
             {/* Custom buttons */}
-            <Button className="custom-button" onClick={handleAddFavoriteMovie}>
-              Add Favorite Movie
-            </Button>
-            <Button className="custom-button" variant="danger" onClick={handleDeleteFavoriteMovie}>
-              Delete Favorite Movie
-            </Button>
+
           </div>
         </div>
       </div>
     </div>
   );
-};
+}; 

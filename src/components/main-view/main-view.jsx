@@ -58,7 +58,7 @@ export const MainView = () => {
 
   // Add Favorite Movie
   const addFav = (id) => {
-    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.username}/movies/${id}`, {
+    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.Username}/movies/${id}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -85,7 +85,7 @@ export const MainView = () => {
 
   // Remove Favorite Movie
   const removeFav = (id) => {
-    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.username}/movies/${id}`, {
+    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.Username}/movies/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -101,7 +101,11 @@ export const MainView = () => {
       .then((userData) => {
         if (userData) {
           localStorage.setItem('user', JSON.stringify(userData));
-          setUser(userData);
+          const favMovies = userData.FavoriteMovies.filter(f => f !== id);
+          setUser(prevState => ({
+            ...prevState,
+            FavoriteMovies: favMovies
+          }));
         }
       })
       .catch((error) => {
@@ -109,22 +113,19 @@ export const MainView = () => {
         alert('Failed to remove');
       });
   };
-  
+
   // Function to handle genre search
-const handleGenreSearch = (event) => {
-  event.preventDefault();
-  const genreToSearch = searchTerm.toLowerCase();
+  const handleGenreSearch = (event) => {
+    event.preventDefault();
+    const genreToSearch = searchTerm.toLowerCase();
 
-  // Filter movies based on the genre
-  const filtered = movies.filter((movie) =>
-    movie.Genre.Name.toLowerCase().includes(genreToSearch)
-  );
+    // Filter movies based on the genre
+    const filtered = movies.filter((movie) =>
+      movie.Genre.Name.toLowerCase().includes(genreToSearch)
+    );
 
-  setFilteredMovies(filtered);
-};
-
-
-
+    setFilteredMovies(filtered);
+  };
   return (
     <Router>
       <NavigationBar
@@ -171,8 +172,8 @@ const handleGenreSearch = (event) => {
                     <Col md={12}>
                       <MovieView
                         movies={movies}
-                        removeFav={removeFav}
-                        addFav={addFav}
+                      // removeFav={removeFav}
+                      // addFav={addFav}
                       />
                     </Col>
                   )}
@@ -193,6 +194,9 @@ const handleGenreSearch = (event) => {
                         <Col key={movie._id} md={4} lg={3} className="movie-card-col">
                           <MovieCard
                             movie={movie}
+                            isFavorite={user.FavoriteMovies.includes(movie._id)}
+                            removeFav={removeFav}
+                            addFav={addFav}
                             onMovieClick={(newSelectedMovie) => {
                               // Handle the selection of a movie
                               // Example: setSelectedMovie(newSelectedMovie)
@@ -210,7 +214,7 @@ const handleGenreSearch = (event) => {
               element={
                 <>
                   {!user ? (
-                    <Navigate to="/login" replace />
+                    <Navigate to="/" replace />
                   ) : (
                     <Col>
                       <ProfileView
@@ -219,6 +223,7 @@ const handleGenreSearch = (event) => {
                         removeFav={removeFav}
                         addFav={addFav}
                         setUser={setUser}
+                        token={token}
                       />
                     </Col>
                   )}
@@ -230,4 +235,4 @@ const handleGenreSearch = (event) => {
       </Container>
     </Router>
   );
-            }
+}

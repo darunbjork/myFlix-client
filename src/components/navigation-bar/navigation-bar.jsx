@@ -29,13 +29,15 @@ export const NavigationBar = ({ user, onLoggedOut, onGenreSearch }) => {
   };
 
   // Inside NavigationBar component
+
 const handleSearch = (e) => {
   e.preventDefault();
   if (typeof onGenreSearch === 'function') {
-    onGenreSearch(searchTerm);
+    onGenreSearch(e, searchTerm);
     setSearchTerm(''); // Clear search term after search
   }
 };
+
 
 
   return (
@@ -64,7 +66,7 @@ const handleSearch = (e) => {
                   placeholder="Search by Genre"
                   className="me-2"
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => setSearchTerm(e.target.value)} 
                 />
                 <Button variant="outline-info" type="submit">
                   Search
