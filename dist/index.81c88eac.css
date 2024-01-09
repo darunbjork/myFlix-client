@@ -1,3 +1,65 @@
+.back-button, .add-favorite-button, .delete-favorite-button {
+  color: #fff;
+  cursor: pointer;
+  background-color: orange;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+  padding: 4px 12px;
+}
+
+.back-button:hover, .back-button:focus, .add-favorite-button:hover, .add-favorite-button:focus, .delete-favorite-button:hover, .delete-favorite-button:focus {
+  background-color: #ff8c00;
+}
+
+.card:hover .card-img-top {
+  filter: brightness(70%);
+  border-radius: 8px;
+  transition: transform .3s ease-in-out, filter .3s ease-in-out;
+  transform: scale(1.05)translateX(10px);
+  box-shadow: 0 8px 16px #0003;
+}
+
+.navbar {
+  background-color: #000;
+}
+
+.navbar .navbar-brand {
+  color: orange;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar .navbar-collapse {
+  justify-content: flex-end;
+}
+
+.navbar .navbar-collapse .nav-link {
+  color: orange;
+  text-transform: uppercase;
+  margin-right: 15px;
+  font-size: 18px;
+}
+
+.navbar .navbar-collapse .nav-link:hover {
+  color: #ffc04d;
+  text-decoration: none;
+}
+
+.navbar .navbar-collapse .btn {
+  color: #fff;
+  background-color: orange;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  transition: background-color .3s ease-in-out;
+}
+
+.navbar .navbar-collapse .btn:hover {
+  color: #fff;
+  background-color: #ffc04d;
+}
+
 :root, [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -13202,4 +13264,4 @@ textarea.form-control-lg {
   }
 }
 
-/*# sourceMappingURL=index.ce1d6491.css.map */
+/*# sourceMappingURL=index.81c88eac.css.map */

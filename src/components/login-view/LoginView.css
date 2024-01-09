@@ -1,0 +1,87 @@
+@keyframes sparkle {
+    0% {
+      background-position: -200px;
+    }
+    100% {
+      background-position: 200px;
+    }
+  }
+  
+  @keyframes pulse {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+    50% {
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .sparkle-form {
+    /* Example styles for sparkle effect */
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 2%, transparent 70%);
+    animation: sparkle 1s linear infinite alternate, pulse; /* Combine sparkle and pulse animations */
+    padding: 20px; /* Adjust as needed */
+    border-radius: 10px; /* Rounded corners for the form */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    margin: 20px auto; /* Centering the form */
+    max-width: 400px; /* Example maximum width for the form */
+  }
+  
+  /* Style the button */
+  .sparkle-form button {
+    margin-top: 10px; /* Adjust spacing */
+  }
+  
+
+  /* LoginView.css */
+
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 10px 0px #fff; /* Initial glow effect */
+  }
+  50% {
+    box-shadow: 0 0 20px 5px #fff; /* Stronger glow effect */
+  }
+  100% {
+    box-shadow: 0 0 10px 0px #fff; /* Returning to initial glow effect */
+  }
+}
+
+/* Apply the animation to the form container */
+.login-form-container {
+  position: relative;
+  padding: 20px; /* Adjust padding as needed */
+  border-radius: 10px; /* Rounded corners for the form */
+  animation: borderGlow 3s linear infinite; /* Continuous border glow animation */
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 2%, transparent 70%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  margin: 20px auto; /* Centering the form */
+  max-width: 400px; /* Example maximum width for the form */
+}
+
+/* Style the form inputs */
+.login-form-container input[type="text"],
+.login-form-container input[type="password"] {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px;
+  border-radius: 3px;
+  border: 1px solid #fff; /* White border color */
+  /* Additional styles for form inputs */
+}
+
+/* Style the button */
+.login-form-container button[type="submit"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 3px;
+  border: none;
+  background-color: #007bff; /* Example button background color */
+  color: #fff;
+  cursor: pointer;
+  /* Additional styles for submit button */
+}
+
