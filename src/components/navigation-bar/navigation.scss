@@ -1,0 +1,71 @@
+$primary: orange;
+$body-bg: black;
+$body-color: white;
+$link-hover: lighten($primary, 15%); /* Calculating hover color */
+
+/* Add this CSS to your navigation.scss file */
+.navbar.enlarge-on-hover {
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar.enlarge-on-hover:hover {
+  transform: scale(1.05); /* Adjust the scale as needed */
+}
+
+
+/* Navigation bar styles */
+.navbar {
+  background-color: $body-bg;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: $link-hover; /* Change background color on hover */
+  }
+
+  .navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: $primary; /* Change the brand color */
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: $body-color; /* Change brand color on hover */
+    }
+  }
+
+  .navbar-toggler-icon {
+    background-color: $primary; /* Toggler icon color */
+  }
+
+  .navbar-collapse {
+    justify-content: flex-end;
+
+    .nav-link {
+      margin-right: 15px;
+      color: $primary;
+      font-size: 18px; /* Adjust link font size */
+      text-transform: uppercase; /* Uppercase text */
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        text-decoration: none;
+        color: $body-color; /* Change link color on hover */
+      }
+    }
+
+    .btn {
+      /* Example styling for buttons in the navbar */
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      background-color: $primary;
+      color: $body-color;
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover {
+        background-color: $link-hover;
+        color: $body-color;
+      }
+    }
+  }
+}
