@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import './movie-view.scss'; // Import SCSS file for styling
+import './movie-view.scss'; 
 
 export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }) => {
   const { movieId } = useParams();
@@ -83,9 +83,6 @@ export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }
             <Button className="back-button" onClick={handleBackClick}>
               Back
             </Button>
-
-            {/* Custom buttons */}
-
           </div>
         </div>
       </div>
