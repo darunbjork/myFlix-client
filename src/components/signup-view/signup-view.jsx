@@ -62,6 +62,7 @@ export const SignupView = () => {
   <Form.Label>Username:</Form.Label>
   <Form.Control
     type="text"
+    placeholder="Username"
     value={username}
     onChange={(e) => setUsername(e.target.value)}
     minLength="5"
@@ -73,6 +74,7 @@ export const SignupView = () => {
   <Form.Label>Password:</Form.Label>
   <Form.Control
     type="password"
+    placeholder="Password"
     value={password}
     onChange={(e) => setPassword(e.target.value)}
     required
@@ -83,6 +85,7 @@ export const SignupView = () => {
   <Form.Label>Email:</Form.Label>
   <Form.Control
     type="email"
+    placeholder="email"
     value={email}
     onChange={(e) => setEmail(e.target.value)}
     required

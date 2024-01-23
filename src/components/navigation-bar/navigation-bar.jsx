@@ -36,28 +36,40 @@ export const NavigationBar = ({ user, onLoggedOut, onGenreSearch }) => {
             </Nav.Link>
           )}
         </Nav>
-        <Navbar.Text ref={textRef} className="navbar-text d-none d-lg-block flex-fill text-center">
-          Explore Your Favorite Films
-        </Navbar.Text>
+        {user && (
+          <Navbar.Text
+            ref={textRef}
+            className="navbar-text d-none d-lg-block flex-fill text-center"
+            style={{
+              fontSize: '1.2rem',
+              fontWeight: 'bold',
+              color: '#fff', // Adjust the color as needed
+              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)', // Add a subtle text shadow
+            }}
+          >
+            Discover Your Favorite Movies
+          </Navbar.Text>
+        )}
+
         <Nav>
-        {user ? (
-          <>
-            <Form onSubmit={handleSearch} className="d-flex me-2">
-              <FormControl
-                type="text"
-                placeholder="Search by Genre"
-                className="me-2"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <Button variant="outline-info" type="submit">
-                Search
-              </Button>
-            </Form>
-            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-          </>
-        ) : (
-          <>
+          {user ? (
+            <>
+              <Form onSubmit={handleSearch} className="d-flex me-2">
+                <FormControl
+                  type="text"
+                  placeholder="Search by Genre"
+                  className="me-2"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Button variant="outline-info" type="submit">
+                  Search
+                </Button>
+              </Form>
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            </>
+          ) : (
+            <>
               <Nav.Link as={Link} to="/login">
                 Login
               </Nav.Link>
