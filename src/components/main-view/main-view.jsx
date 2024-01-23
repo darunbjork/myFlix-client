@@ -118,8 +118,7 @@ export const MainView = () => {
     setMovies(filtered);
   };
 
-
-   return (
+ return (
     <Router>
       <NavigationBar
         user={user}
@@ -128,7 +127,7 @@ export const MainView = () => {
           localStorage.removeItem('token');
           localStorage.removeItem('user');
         }}
-        onGenreSearch={handleGenreSearch} // Pass the callback function to NavigationBar
+        onGenreSearch={handleGenreSearch}
       />
       <Container>
         <Row className="justify-content-center my-5">
@@ -139,7 +138,7 @@ export const MainView = () => {
               element={
                 <>
                   {user ? (
-                    <Navigate to="/" />
+                    <Navigate to="/profile" />
                   ) : (
                     <Col md={5}>
                       <LoginView
@@ -187,6 +186,7 @@ export const MainView = () => {
                             removeFav={removeFav}
                             addFav={addFav}
                             onMovieClick={(newSelectedMovie) => {
+                              // Handle movie click if needed
                             }}
                           />
                         </Col>
@@ -222,4 +222,4 @@ export const MainView = () => {
       </Container>
     </Router>
   );
-            }
+};
