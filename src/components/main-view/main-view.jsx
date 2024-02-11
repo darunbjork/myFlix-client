@@ -14,6 +14,7 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser || null);
   const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
+  const [originalMovies, setOriginalMovies] = useState([]);
 
   useEffect(() => {
     if (!token) return;
@@ -45,6 +46,7 @@ export const MainView = () => {
           Featured: movie.Featured || false,
         }));
         setMovies(moviesFromApi);
+        setOriginalMovies(moviesFromApi);
       })
       .catch((error) => {
         console.error('Error fetching movies:', error);
@@ -112,13 +114,14 @@ export const MainView = () => {
 
   const handleGenreSearch = (searchTerm) => {
     const genreToSearch = searchTerm.toLowerCase();
-    const filtered = movies.filter((movie) =>
-      movie.Genre?.Name.toLowerCase().includes(genreToSearch)
+    const filtered = originalMovies.filter((movie) =>
+      movie.Genre?.Name.toLowerCase().includes(genreToSearch) ||
+      movie.Title.toLowerCase().includes(genreToSearch)
     );
     setMovies(filtered);
   };
 
- return (
+  return (
     <Router>
       <NavigationBar
         user={user}
