@@ -1,11 +1,12 @@
+// main-view.jsx
 import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 export const MainView = () => {
@@ -15,6 +16,7 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
   const [originalMovies, setOriginalMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     if (!token) return;
@@ -53,7 +55,6 @@ export const MainView = () => {
       });
   }, [token]);
 
-  // Add Favorite Movie
   const addFav = (id) => {
     fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.Username}/movies/${id}`, {
       method: 'POST',
@@ -80,7 +81,6 @@ export const MainView = () => {
       });
   };
 
-  // Remove Favorite Movie
   const removeFav = (id) => {
     fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.Username}/movies/${id}`, {
       method: 'DELETE',
@@ -98,10 +98,10 @@ export const MainView = () => {
       .then((userData) => {
         if (userData) {
           localStorage.setItem('user', JSON.stringify(userData));
-          const favMovies = userData.FavoriteMovies.filter(f => f !== id);
-          setUser(prevState => ({
+          const favMovies = userData.FavoriteMovies.filter((f) => f !== id);
+          setUser((prevState) => ({
             ...prevState,
-            FavoriteMovies: favMovies
+            FavoriteMovies: favMovies,
           }));
         }
       })
@@ -111,12 +111,12 @@ export const MainView = () => {
       });
   };
 
-
   const handleGenreSearch = (searchTerm) => {
     const genreToSearch = searchTerm.toLowerCase();
-    const filtered = originalMovies.filter((movie) =>
-      movie.Genre?.Name.toLowerCase().includes(genreToSearch) ||
-      movie.Title.toLowerCase().includes(genreToSearch)
+    const filtered = originalMovies.filter(
+      (movie) =>
+        movie.Genre?.Name.toLowerCase().includes(genreToSearch) ||
+        movie.Title.toLowerCase().includes(genreToSearch)
     );
     setMovies(filtered);
   };
@@ -131,6 +131,8 @@ export const MainView = () => {
           localStorage.removeItem('user');
         }}
         onGenreSearch={handleGenreSearch}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
       <Container>
         <Row className="justify-content-center my-5">
@@ -188,9 +190,6 @@ export const MainView = () => {
                             isFavorite={user.FavoriteMovies.includes(movie._id)}
                             removeFav={removeFav}
                             addFav={addFav}
-                            onMovieClick={(newSelectedMovie) => {
-                              // Handle movie click if needed
-                            }}
                           />
                         </Col>
                       ))}

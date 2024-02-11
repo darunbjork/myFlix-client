@@ -1,12 +1,12 @@
+// navigation-bar.jsx
 import React, { useRef, useState } from 'react';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './navigation.scss';
 
-export const NavigationBar = ({ user, onLoggedOut, onGenreSearch }) => {
+export const NavigationBar = ({ user, onLoggedOut, onGenreSearch, searchTerm, setSearchTerm }) => {
   const textRef = useRef(null);
-  const colors = ['#ff6347', '#ffd700', '#7fff00', '#40e0d0', '#9370db'];
-  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     if (typeof onLoggedOut === 'function') {
@@ -18,7 +18,8 @@ export const NavigationBar = ({ user, onLoggedOut, onGenreSearch }) => {
     e.preventDefault();
     if (typeof onGenreSearch === 'function') {
       onGenreSearch(searchTerm);
-      setSearchTerm(''); // Clear search term after search
+      setSearchTerm(''); // Clear search term for the next search
+      navigate('/'); // Use navigate to Movies route after search
     }
   };
 
@@ -43,8 +44,8 @@ export const NavigationBar = ({ user, onLoggedOut, onGenreSearch }) => {
             style={{
               fontSize: '1.2rem',
               fontWeight: 'bold',
-              color: '#fff', // Adjust the color as needed
-              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)', // Add a subtle text shadow
+              color: '#fff',
+              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)',
             }}
           >
             Discover Your Favorite Movies
