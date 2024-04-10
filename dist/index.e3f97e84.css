@@ -1,3 +1,335 @@
+.movie-card-container {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 50%;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+}
+
+.movie-card-container .image-container {
+  flex: 1;
+  max-width: 50%;
+  overflow: hidden;
+}
+
+.movie-card-container .image-container img {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+.movie-card-container .movie-details {
+  flex: 1;
+  padding: 10px;
+}
+
+.movie-card-container .movie-details h3 {
+  margin-bottom: 10px;
+}
+
+.movie-card-container .movie-details p {
+  margin-bottom: 20px;
+}
+
+.movie-card-container .movie-details button {
+  margin-right: 10px;
+}
+
+.custom-button {
+  color: #fff;
+  cursor: pointer;
+  background-color: orange;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 4px 12px;
+}
+
+.custom-button:hover, .custom-button:focus {
+  background-color: #ff8c00;
+}
+
+.back-button, .add-favorite-button, .delete-favorite-button {
+  color: #fff;
+  cursor: pointer;
+  background-color: orange;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 4px 12px;
+}
+
+.back-button:hover, .back-button:focus, .add-favorite-button:hover, .add-favorite-button:focus, .delete-favorite-button:hover, .delete-favorite-button:focus {
+  background-color: #ff8c00;
+}
+
+.movie-details {
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+.movie-details .movie-card-text {
+  margin-top: 20px;
+}
+
+.card {
+  position: relative;
+}
+
+.card:hover .card-img-top {
+  filter: brightness(70%);
+  border-radius: 8px;
+  transition: transform .3s ease-in-out, filter .3s ease-in-out;
+  transform: scale(1.05)translateX(10px);
+  box-shadow: 0 8px 16px #0003;
+}
+
+.card .card-img-top {
+  transition: transform .5s;
+}
+
+.movie-card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-card-image img {
+  width: 22%;
+  height: 5%;
+  transition: transform .5s, filter .5s, box-shadow .5s;
+}
+
+.movie-card:hover img {
+  filter: brightness(70%);
+  transform: scale(1.2)rotate(20deg)translate(10px, 10px);
+  box-shadow: 0 8px 16px #0003;
+}
+
+@keyframes sparkle {
+  0% {
+    background-position: -200px;
+  }
+
+  100% {
+    background-position: 200px;
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.sparkle-form {
+  background-image: linear-gradient(to right, #ffffff1a 2%, #0000 70%);
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  animation: 1s linear infinite alternate sparkle, pulse;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+.sparkle-form button {
+  margin-top: 10px;
+}
+
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 10px #fff;
+  }
+
+  50% {
+    box-shadow: 0 0 20px 5px #fff;
+  }
+
+  100% {
+    box-shadow: 0 0 10px #fff;
+  }
+}
+
+.login-form-container {
+  background-image: linear-gradient(to right, #ffffff1a 2%, #0000 70%);
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  animation: 3s linear infinite borderGlow;
+  position: relative;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+.login-form-container input[type="text"], .login-form-container input[type="password"] {
+  border: 1px solid #fff;
+  border-radius: 3px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px;
+}
+
+.login-form-container button[type="submit"] {
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  padding: 8px;
+}
+
+@media (width <= 767px) {
+  .login-form-container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 30px;
+  }
+
+  .login-form-container input[type="text"], .login-form-container input[type="password"] {
+    margin-bottom: 20px;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .login-form-container button[type="submit"] {
+    padding: 12px;
+    font-size: 18px;
+  }
+}
+
+.signup-container {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  position: relative;
+}
+
+.signup-container {
+  border-radius: 5px;
+  padding: 20px;
+  animation: 3s linear infinite borderGlow;
+  position: relative;
+}
+
+.signup-container input[type="text"], .signup-container input[type="password"], .signup-container input[type="email"], .signup-container input[type="date"], .signup-container button[type="submit"] {
+  border: 1px solid #fff;
+  border-radius: 3px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px;
+}
+
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 10px #fff;
+  }
+
+  50% {
+    box-shadow: 0 0 20px 5px #fff;
+  }
+
+  100% {
+    box-shadow: 0 0 10px #fff;
+  }
+}
+
+.welcome-text {
+  color: #333;
+  text-shadow: 1px 1px 2px #ccc;
+  margin-bottom: 10px;
+  font-size: 2em;
+}
+
+.create-account-text {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.signup-container button[type="submit"] {
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  padding: 8px;
+}
+
+.navbar.enlarge-on-hover {
+  transition: transform .3s ease-in-out;
+}
+
+.navbar.enlarge-on-hover:hover {
+  transform: scale(1.05);
+}
+
+.navbar {
+  background-color: #000;
+  transition: background-color .3s ease-in-out;
+}
+
+.navbar:hover {
+  background-color: #ffc04d;
+}
+
+.navbar .navbar-brand {
+  color: orange;
+  font-size: 24px;
+  font-weight: bold;
+  transition: color .3s ease-in-out;
+}
+
+.navbar .navbar-brand:hover {
+  color: #fff;
+}
+
+.navbar .navbar-toggler-icon {
+  background-color: orange;
+}
+
+.navbar .navbar-collapse {
+  justify-content: flex-end;
+}
+
+.navbar .navbar-collapse .nav-link {
+  color: orange;
+  text-transform: uppercase;
+  margin-right: 15px;
+  font-size: 18px;
+  transition: color .3s ease-in-out;
+}
+
+.navbar .navbar-collapse .nav-link:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar .navbar-collapse .btn {
+  color: #fff;
+  background-color: orange;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  transition: background-color .3s ease-in-out;
+}
+
+.navbar .navbar-collapse .btn:hover {
+  color: #fff;
+  background-color: #ffc04d;
+}
+
 :root, [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -13202,4 +13534,4 @@ textarea.form-control-lg {
   }
 }
 
-/*# sourceMappingURL=index.ce1d6491.css.map */
+/*# sourceMappingURL=index.e3f97e84.css.map */
