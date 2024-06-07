@@ -21,7 +21,7 @@ export const MainView = () => {
   useEffect(() => {
     if (!token) return;
 
-    fetch('https://flixster-movies-7537569b59ac.herokuapp.com/movies', {
+    fetch('https://myflix-movie-app-3823c24113de.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
@@ -56,7 +56,7 @@ export const MainView = () => {
   }, [token]);
 
   const addFav = (id) => {
-    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.Username}/movies/${id}`, {
+    fetch(`https://https://myflix-movie-app-3823c24113de.herokuapp.com/users/${user.Username}/movies/${id}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -82,7 +82,7 @@ export const MainView = () => {
   };
 
   const removeFav = (id) => {
-    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.Username}/movies/${id}`, {
+    fetch(`https://myflix-movie-app-3823c24113de.herokuapp.com/users/${user.Username}/movies/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
