@@ -19,7 +19,7 @@ export const LoginView = ({ onLoggedIn }) => {
     const name = encodeURIComponent(username);
     const userPassword = encodeURIComponent(password);
 
-    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/login?Username=${name}&Password=${userPassword}`, {
+    fetch(`https://myflix-movie-app-3823c24113de.herokuapp.com/login?Username=${name}&Password=${userPassword}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

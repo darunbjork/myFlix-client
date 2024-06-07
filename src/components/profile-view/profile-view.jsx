@@ -28,7 +28,7 @@ export const ProfileView = ({ user: loggedInUser, token, movies, setUser, addFav
 
     setValidated(true);
     try {
-      const response = await fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${loggedInUser.Username}`, {
+      const response = await fetch(`https://myflix-movie-app-3823c24113de.herokuapp.com/users/${loggedInUser.Username}`, {
         method: 'PUT',
         body: JSON.stringify(userData),
         headers: {

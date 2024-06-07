@@ -23,7 +23,7 @@ export const SignupView = () => {
 
     try {
       const response = await fetch(
-        "https://flixster-movies-7537569b59ac.herokuapp.com/users",
+        "https://myflix-movie-app-3823c24113de.herokuapp.com/users",
         {
           method: "POST",
           body: JSON.stringify(data),
