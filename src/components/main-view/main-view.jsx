@@ -56,6 +56,7 @@ export const MainView = () => {
   }, [token]);
 
   const addFav = (id) => {
+
     fetch(`https://myflix-movie-app-3823c24113de.herokuapp.com/users/${user.Username}/movies/${id}`, {
       method: 'POST',
       headers: {
