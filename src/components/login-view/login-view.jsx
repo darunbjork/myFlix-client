@@ -16,17 +16,24 @@ export const LoginView = ({ onLoggedIn }) => {
       return;
     }
 
-    const name = encodeURIComponent(username);
-    const userPassword = encodeURIComponent(password);
+    const credentials = {
+      Username: username,
+      Password: password,
+    };
 
-    fetch(`https://myflix-movie-app-3823c24113de.herokuapp.com/login?Username=${name}&Password=${userPassword}`, {
+    fetch("https://myflix-movie-app-3823c24113de.herokuapp.com/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: {}
+      body: JSON.stringify(credentials),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log("Login response: ", data);
         if (data.user) {

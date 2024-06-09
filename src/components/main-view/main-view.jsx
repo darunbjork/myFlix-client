@@ -1,4 +1,3 @@
-// main-view.jsx
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap';
 import { MovieCard } from '../movie-card/movie-card';
@@ -44,7 +43,7 @@ export const MainView = () => {
             Bio: movie.Director?.Bio || '',
             Birth: movie.Director?.Birth || 0,
           },
-          ImageURL: movie.ImageURL,
+          ImagePath: movie.ImagePath, // Use ImagePath here
           Featured: movie.Featured || false,
         }));
         setMovies(moviesFromApi);
@@ -56,7 +55,7 @@ export const MainView = () => {
   }, [token]);
 
   const addFav = (id) => {
-    fetch(`https://myflix-movie-app-3823c24113de.herokuapp.com/users/${user.Username}/movies/${id}`, {
+    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.Username}/movies/${id}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

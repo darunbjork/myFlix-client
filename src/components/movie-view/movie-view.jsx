@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import './movie-view.scss'; 
+import './movie-view.scss';
 
 export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }) => {
   const { movieId } = useParams();
@@ -17,6 +17,8 @@ export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }
     return <div>Movie not found!</div>;
   }
 
+  console.log("Movie ImagePath: ", movie.ImagePath);
+
   const handleBackClick = () => {
     navigate(-1);
   };
@@ -29,29 +31,6 @@ export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }
     deleteFavorite(movie._id);
   };
 
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
-
-
-  const handleAddFavoriteMovie = () => {
-    // Check if the movie is already in favorites to avoid duplicates
-    if (!favoriteMovies.some((movieItem) => movieItem._id === movie._id)) {
-      // Add the current movie to favorites
-      setFavoriteMovies([...favoriteMovies, movie]);
-      console.log('Adding movie to favorites...');
-    } else {
-      console.log('Movie already in favorites!');
-    }
-  };
-
-  const handleDeleteFavoriteMovie = () => {
-    // Filter out the current movie from favorites
-    const updatedFavorites = favoriteMovies.filter((movieItem) => movieItem._id !== movie._id);
-    setFavoriteMovies(updatedFavorites);
-    console.log('Deleting movie from favorites...');
-  };
-
-
-
   return (
     <div className="movie-view-container">
       <div
@@ -60,7 +39,7 @@ export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }
         onMouseLeave={(e) => e.currentTarget.classList.remove('hover')}
       >
         <div className="movie-card-image">
-          <img src={movie.ImageURL} alt={movie.Title} />
+          <img src={movie.ImagePath} alt={movie.Title} /> {/* Updated to use ImagePath */}
         </div>
         <div className="movie-details">
           <div>
@@ -88,4 +67,4 @@ export const MovieView = ({ movies, isFavorite, toggleFavorite, deleteFavorite }
       </div>
     </div>
   );
-}; 
+};
