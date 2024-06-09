@@ -25,13 +25,11 @@ export const MovieCard = ({ movie, onMovieClick, isFavorite, addFav, removeFav, 
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Genre.Name}</Card.Text>
         <div className="d-flex justify-content-between align-items-center mb-3">
-          <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-            {showOpenButton && (
-              <Button variant="primary" onClick={() => onMovieClick(movie)}>
-                Open
-              </Button>
-            )}
-          </Link>
+          {showOpenButton && (
+            <Button variant="primary" onClick={() => onMovieClick(movie)}>
+              Open
+            </Button>
+          )}
           {isFavorite ? (
             <Button className="my-2 me-2" variant="danger" onClick={() => removeFav(movie._id)}>
               Remove Fav
@@ -64,7 +62,7 @@ MovieCard.propTypes = {
     ImagePath: PropTypes.string.isRequired,
     Featured: PropTypes.bool.isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func,
+  onMovieClick: PropTypes.func.isRequired, // Ensure this is required
   isFavorite: PropTypes.bool,
   showOpenButton: PropTypes.bool,
 };

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -16,6 +16,7 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [originalMovies, setOriginalMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!token) return;
@@ -43,7 +44,7 @@ export const MainView = () => {
             Bio: movie.Director?.Bio || '',
             Birth: movie.Director?.Birth || 0,
           },
-          ImagePath: movie.ImagePath, // Use ImagePath here
+          ImagePath: movie.ImagePath,
           Featured: movie.Featured || false,
         }));
         setMovies(moviesFromApi);
@@ -59,6 +60,7 @@ export const MainView = () => {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
       },
     })
       .then((response) => {
@@ -85,6 +87,7 @@ export const MainView = () => {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
       },
     })
       .then((response) => {
@@ -118,6 +121,10 @@ export const MainView = () => {
         movie.Title.toLowerCase().includes(genreToSearch)
     );
     setMovies(filtered);
+  };
+
+  const onMovieClick = (movie) => {
+    navigate(`/movies/${movie._id}`);
   };
 
   return (
@@ -189,6 +196,7 @@ export const MainView = () => {
                             isFavorite={user.FavoriteMovies.includes(movie._id)}
                             removeFav={removeFav}
                             addFav={addFav}
+                            onMovieClick={onMovieClick} // Pass the onMovieClick function as a prop
                           />
                         </Col>
                       ))}
