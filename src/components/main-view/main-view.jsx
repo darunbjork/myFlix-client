@@ -6,9 +6,9 @@ import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
-export const MainView = () => {
+const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const storedToken = localStorage.getItem('token');
   const [user, setUser] = useState(storedUser || null);
@@ -56,7 +56,7 @@ export const MainView = () => {
   }, [token]);
 
   const addFav = (id) => {
-    fetch(`https://flixster-movies-7537569b59ac.herokuapp.com/users/${user.Username}/movies/${id}`, {
+    fetch(`https://myflix-movie-app-3823c24113de.herokuapp.com/users/${user.Username}/movies/${id}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -128,7 +128,7 @@ export const MainView = () => {
   };
 
   return (
-    <Router>
+    <>
       <NavigationBar
         user={user}
         onLoggedOut={() => {
@@ -229,6 +229,8 @@ export const MainView = () => {
           </Routes>
         </Row>
       </Container>
-    </Router>
+    </>
   );
 };
+
+export default MainView;
