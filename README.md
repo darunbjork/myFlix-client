@@ -1,6 +1,6 @@
 myFlix-client: Dive into React-Driven Cinematic Exploration
 
-Click
+Click https://flix-movie-hub.netlify.app
 
 Welcome to myFlix-client, a dynamic web application developed using React, powered by Parcel for streamlined building, and adorned with SCSS for elegant styling.
 
